@@ -463,6 +463,7 @@
 
 .message-title i {
   font-size: 3vh;
+  cursor: pointer;
 }
 
 .input textarea {
@@ -497,7 +498,8 @@
   display: flex;
   flex-direction: column;
   flex: 1;
-  overflow: auto;
+  overflow-y: auto;
+  overflow-x: hidden;
 }
 
 .dummy div:first-child {

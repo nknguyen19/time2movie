@@ -13,7 +13,7 @@ const MovieSlider = (props) => {
         speed: 500,
         slidesToShow: 4,
         slidesToScroll: 1,
-        autoplay: true,
+        autoplay: false,
         autoplaySpeed: 3000,
     });
 
@@ -53,7 +53,7 @@ const MovieSlider = (props) => {
                             </div>
                             <span>{movie.title.toUpperCase()}</span>
                             <div className="description">
-                                <p>{movie.description.substring(0, 250) + '...'}</p>
+                                <p>{movie.description.substring(0, 220) + '...'}</p>
                             </div>
                         </div>
                     </div>

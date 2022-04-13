@@ -54,7 +54,7 @@ const Home = () => {
 
             <MovieSlider type="Recommended for you" />
 
-            {currentUser ? <MessageBox /> : ''}
+            <MessageBox />
         </div>
     )
 }

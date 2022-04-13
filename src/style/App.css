@@ -40,10 +40,11 @@
 .home, .signup, .signin, .movie {
   background: #FBE4D4;
   color: #fff;
-  font-family: 'Helvetica Neue',Helvetica,Arial,sans-serif;
+  font-family: 'Poppins',sans-serif;
   font-style: normal;
   width: 100%;
   min-height: 100vh;
+  overflow: hidden;
 }
 
 .home-intro, .signup-wrap, .signin-wrap {
@@ -322,7 +323,7 @@
 
 .movie-intro h1 {
   text-shadow: 0px 1px, 1px 0px, 1px 1px;
-  padding: 10% 5%;
+  padding: 7% 5%;
   text-align: center;
 }
 
@@ -405,4 +406,100 @@
 .movie-info .description {
   background: #0002;
   flex: 2;
+}
+
+.message-box {
+  position: fixed;
+  left: 70%;
+  width: 25%;
+  top: auto;
+  bottom: 0;
+  box-shadow: 0px 0px 5px rgba(0, 0, 0, 0.5);
+}
+
+.message-title {
+  background: #F3A974;
+  padding: 5px;
+  color: #000;
+  font-weight: 600;
+  display: flex;
+  justify-content: space-between;
+}
+
+.message-content {
+  background-color: #FBE4D4;
+}
+
+.messages {
+  height: 40vh;
+  border: 2px solid #fff;
+  border-radius: 5px;
+}
+
+.input {
+  height: 7vh;
+  border: 2px solid #fff;
+  border-radius: 5px;
+  display: flex;
+  justify-content: space-between;
+}
+
+.input .submit-message {
+  background: #F3A974;
+  border-radius: 5px;
+}
+
+.input .submit-message:hover {background-color: #a66c42}
+
+.input .submit-message:active {
+  background-color: #a66c42;
+  box-shadow: 0 5px #666;
+  transform: translateY(2px);
+}
+
+.message-title i:active {
+  transform: translateX(2px);
+}
+
+.message-title i {
+  font-size: 3vh;
+}
+
+.input textarea {
+  width: 100%;
+  background: inherit;
+  font-family: inherit;
+}
+
+.messages {
+  display: flex;
+}
+.message {
+  width: fit-content;
+  padding: 5px 10px;
+  border-radius: 20px;
+  margin: 5px;
+  max-width: 70%;
+}
+
+.message.client {
+  align-self: flex-end;
+  background: #F3A974;
+}
+
+.message.server {
+  align-self: flex-start;
+  color: #00A0B5FF;
+  background-color: #fff;
+}
+
+.dummy {
+  display: flex;
+  flex-direction: column;
+  flex: 1;
+  overflow: auto;
+}
+
+.dummy div:first-child {
+  margin-top: auto;
 }

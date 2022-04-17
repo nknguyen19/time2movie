@@ -19,7 +19,12 @@ const Home = () => {
 
     useEffect(async () => {
         const movie_list_response = await fetch('/api/movie/get');
-        const movie_list = await movie_list_response.json();
+        let movie_list = await movie_list_response.json();
+        for (let i = 0; i < movie_list.length; ++i) {
+            const movie_response = await fetch(`https://api.themoviedb.org/3/search/movie?api_key=15d2ea6d0dc1d476efbca3eba2b9bbfb&query=${movie_list[i].title}`);
+            const movie = await movie_response.json();
+            movie_list[i].image = `http://image.tmdb.org/t/p/w500/${movie.results[0].poster_path}`;
+        }
         setMovieList(movie_list);
 
         const user_response = await fetch('/api/user/get-current-user');
@@ -27,7 +32,19 @@ const Home = () => {
             const user = await user_response.json();
             setCurrentUser(user);
         }
+        const script = document.createElement('script');
+
+        script.src = "https://apps.elfsight.com/p/platform.js";
+        script.async = true;
+      
+        document.body.appendChild(script);
+      
+        return () => {
+          document.body.removeChild(script);
+        }
     }, [])
+
+
 
     return (
         <div className="home">
@@ -37,8 +54,8 @@ const Home = () => {
                     {movieList.map(movie => (
                         <div className="movie-intro">
                             <div className="movie-title">
-                                <h1>{movie.title.toUpperCase()}</h1>
-                                <p>{movie.description}</p>
+                                <h1>{movie.title}</h1>
+                                <p>{movie.overview}</p>
                             </div>
                             
                             <div className="movie-image">
@@ -55,6 +72,7 @@ const Home = () => {
             <MovieSlider type="Recommended for you" />
 
             <MessageBox />
+            <div class="elfsight-app-05bc3da4-6fd8-406c-b8db-5b6f627ecd8b"></div>
         </div>
     )
 }

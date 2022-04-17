@@ -20,8 +20,14 @@ const MovieSlider = (props) => {
     useEffect(async () => {
         const response = await fetch('/api/movie/get'); // filter here
         const movie_list = await response.json();
+        for (let i = 0; i < movie_list.length; ++i) {
+            const movie_response = await fetch(`https://api.themoviedb.org/3/search/movie?api_key=15d2ea6d0dc1d476efbca3eba2b9bbfb&query=${movie_list[i].title}`);
+            console.log(movie_response);
+            const movie = await movie_response.json();
+            console.log(movie);
+            movie_list[i].image = `http://image.tmdb.org/t/p/w500/${movie.results[0].poster_path}`;
+        }
         setMovieList(movie_list);
-        console.log(movie_list);
     }, [])
 
     return(
@@ -44,7 +50,7 @@ const MovieSlider = (props) => {
                             </div>
 
                             <div className="rating">
-                                <p>{(new Date(Date.parse(movie.release))).getFullYear()}</p>
+                                <p>{movie.release}</p>
                                 <StarRating
                                     isReadOnly
                                     initialRating={movie.rating}
@@ -53,7 +59,7 @@ const MovieSlider = (props) => {
                             </div>
                             <span>{movie.title.toUpperCase()}</span>
                             <div className="description">
-                                <p>{movie.description.substring(0, 220) + '...'}</p>
+                                <p>{movie.overview}</p>
                             </div>
                         </div>
                     </div>

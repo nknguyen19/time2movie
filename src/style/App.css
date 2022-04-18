@@ -288,6 +288,8 @@
   font-weight: 700;
   padding: 0.5%;
   cursor: pointer;
+  width: fit-content;
+  color: #fff;
 }
 
 .logo:hover {
@@ -504,4 +506,12 @@
 
 .dummy div:first-child {
   margin-top: auto;
+}
+
+.eapps-widget-toolbar {
+  display: none !important;
+}
+
+.cDAUeN .div:nth-child(5) {
+  display: none !important;
 }

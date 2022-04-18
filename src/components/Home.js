@@ -32,16 +32,7 @@ const Home = () => {
             const user = await user_response.json();
             setCurrentUser(user);
         }
-        const script = document.createElement('script');
-
-        script.src = "https://apps.elfsight.com/p/platform.js";
-        script.async = true;
-      
-        document.body.appendChild(script);
-      
-        return () => {
-          document.body.removeChild(script);
-        }
+        console.log('debug');
     }, [])
 
 
@@ -72,7 +63,6 @@ const Home = () => {
             <MovieSlider type="Recommended for you" />
 
             <MessageBox />
-            <div class="elfsight-app-05bc3da4-6fd8-406c-b8db-5b6f627ecd8b"></div>
         </div>
     )
 }

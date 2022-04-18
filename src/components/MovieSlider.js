@@ -22,9 +22,7 @@ const MovieSlider = (props) => {
         const movie_list = await response.json();
         for (let i = 0; i < movie_list.length; ++i) {
             const movie_response = await fetch(`https://api.themoviedb.org/3/search/movie?api_key=15d2ea6d0dc1d476efbca3eba2b9bbfb&query=${movie_list[i].title}`);
-            console.log(movie_response);
             const movie = await movie_response.json();
-            console.log(movie);
             movie_list[i].image = `http://image.tmdb.org/t/p/w500/${movie.results[0].poster_path}`;
         }
         setMovieList(movie_list);

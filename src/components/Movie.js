@@ -3,6 +3,7 @@ import { useParams } from "react-router-dom";
 import '../style/Movie.css'
 import TopBar from "./TopBar";
 import StarRating from "react-svg-star-rating";
+import Comments from "./Comments";
 
 const Movie = () => {
     const { id } = useParams();
@@ -14,9 +15,14 @@ const Movie = () => {
         const movie_response = await fetch(`/api/movie/get/${id}`);
         if (movie_response.status <= 200) {
             const fetch_movie = await movie_response.json();
-            setMovie(fetch_movie);
             setRating(fetch_movie.ratings);
             console.log(fetch_movie);
+            const movie_img_response = await fetch(`https://api.themoviedb.org/3/search/movie?api_key=15d2ea6d0dc1d476efbca3eba2b9bbfb&query=${fetch_movie.title}`);
+            const movie_img = await movie_img_response.json();
+            setMovie({
+                ...fetch_movie,
+                image: `http://image.tmdb.org/t/p/w500/${movie_img.results[0].poster_path}`
+            });
         }
     }
 
@@ -25,11 +31,9 @@ const Movie = () => {
         if (user_response.status <= 200) {
             const user = await user_response.json();
             setCurrentUser(user);
-            console.log(user);
         }
     }
     useEffect(async () => {
-        console.log(id);
         fetchMovie();
         fetchUser();
     }, []);
@@ -77,7 +81,8 @@ const Movie = () => {
                     <h1>{movie.title.toUpperCase()}</h1>
                     <h3>{(new Date(Date.parse(movie.release))).getFullYear()}</h3>
                     <h3>Director: {movie.director}</h3>
-                    <h3>Starring: {movie.starring}</h3>
+                    <h3>Starring: {movie.stars.join(" , ")}</h3>
+                    {console.log(movie.stars)}
                     <div className="avg-rating">
                         <h3>Community Rating</h3>
                         <StarRating
@@ -94,12 +99,13 @@ const Movie = () => {
                             handleOnClick={updateMovieRating}
                             initialRating={rating}
                         />
-                        {console.log(window.innerHeight * 0.03)}
                     </div>
                 </div>
 
             </div>
-            <p>{movie.description}</p>
+            <p className="description">{movie.overview}</p>
+            <Comments currentUser={currentUser}
+                    movie={movie}/>
         </div>
     ) : (
         <div></div>

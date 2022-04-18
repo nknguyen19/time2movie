@@ -11,11 +11,27 @@ const MessageBox = () => {
     }
 
     useEffect(() => {
+        const script = document.createElement('script');
+
+        script.src = "https://apps.elfsight.com/p/platform.js";
+        script.async = true;
+        console.log(document.getElementsByName("message-title"));
+        document.body.appendChild(script);
+
+        return () => {
+          document.body.removeChild(script);
+        }
+    }, []);
+
+    useEffect(() => {
         document.getElementsByClassName('dummy')[0].scrollTop = 99999999;
     }, [messages]);
 
     return (
         <div className="message-box">
+
+            <script src="https://apps.elfsight.com/p/platform.js" defer></script>
+            <div class="elfsight-app-05bc3da4-6fd8-406c-b8db-5b6f627ecd8b"></div>
             <div className='message-title'>
                 Time2Movie<i class={messagePopup ? "fa fa-angle-down" : "fa fa-angle-up"} 
                 onClick={() => setMessagePopup(!messagePopup)}></i>
@@ -36,16 +52,13 @@ const MessageBox = () => {
                 </div>
                 <div className='input'>
                     <textarea id='input-text' placeholder='Aa' onKeyDown={(e) => {
-                        console.log(e);
                         if (e.key === "Enter") {
-                            console.log(e);
                             e.preventDefault();
                             addClientMessage(e.target.value);
                             e.target.value = '';
                             e.target.focus();
                             e.target.setSelectionRange(0, 0);
                         }
-                        console.log(messages);
                     }}/>
                     <button className='submit-message'
                         onClick={(e) => {

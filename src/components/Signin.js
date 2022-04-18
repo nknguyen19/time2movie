@@ -28,7 +28,7 @@ const Signin = () => {
                 } 
                 else {
                     document.getElementsByClassName('userid')[0].value = res._id;
-                    naviagte('/');
+                    naviagte(-1);
                 }
             });
     }
@@ -49,7 +49,7 @@ const Signin = () => {
             .then(res => res.json())
             .then(res => {
                 document.getElementsByClassName('userid')[0].value = res._id;
-                naviagte('/');
+                naviagte(-1);
             });
     }
 

@@ -24,7 +24,10 @@ const TopBar = (props) => {
             {props.currentUser ? 
             <div className="welcome">
                 <img src={props.currentUser.image}/>
-                <div>Welcome {props.currentUser.name} !</div>
+                <div className="welcome-text">
+                    <p>Welcome!  </p> 
+                    <p>  {props.currentUser.name}</p>
+                </div>
                 {props.currentUser.isAdmin ? 
                     <span onClick={() => navigate('/admin')}>Admin</span> 
                 : ''}

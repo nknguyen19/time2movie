@@ -16,6 +16,9 @@ const Comments = ({currentUser, movie}) => {
     }
 
     const removeComment = async (comment) => {
+        if (!currentUser) {
+            return
+        }
         if (comment.userid !== currentUser._id) 
             return;
         const response = await fetch(`/api/comment/remove`, {
@@ -57,6 +60,7 @@ const Comments = ({currentUser, movie}) => {
                 {comments.map((comment, index) => 
                     <Comment comment={comment} 
                             removeComment={removeComment}
+                            currentUser={currentUser}
                 />)}
             </div>
             

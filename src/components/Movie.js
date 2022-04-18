@@ -40,7 +40,7 @@ const Movie = () => {
 
     useEffect(async () => {
         if (currentUser) {
-            const review_response = await fetch(`/api/review/${currentUser._id}/${id}`);
+            const review_response = await fetch(`/api/review/get/${currentUser._id}/${id}`);
             if (review_response.status <= 200) {
                 const result = await review_response.json();
                 setRating(result.ratings);

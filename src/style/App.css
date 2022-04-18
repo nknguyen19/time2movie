@@ -215,6 +215,17 @@
   right: 5%;
 }
 
+.welcome-text {
+  color: #fff;
+}
+
+.welcome-text p {
+  display: inline;
+}
+.welcome-text p:first-child {
+  font-style: italic;
+}
+
 .welcome div {
   margin: 2% 10px;
 }

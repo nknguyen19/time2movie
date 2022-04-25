@@ -4,6 +4,8 @@ import '../style/Movie.css'
 import TopBar from "./TopBar";
 import StarRating from "react-svg-star-rating";
 import Comments from "./Comments";
+import {StickyShareButtons, InlineReactionButtons} from 'sharethis-reactjs';
+import Footer from "./Footer";
 
 const Movie = () => {
     const { id } = useParams();
@@ -21,7 +23,7 @@ const Movie = () => {
             const movie_img = await movie_img_response.json();
             setMovie({
                 ...fetch_movie,
-                image: `http://image.tmdb.org/t/p/w500/${movie_img.results[0].poster_path}`
+                image: `http://image.tmdb.org/t/p/w500/${movie_img.results[0] ? movie_img.results[0].poster_path : `/default_movie_poster.jpg`}`
             });
         }
     }
@@ -75,6 +77,38 @@ const Movie = () => {
     return movie ? (
         <div className="movie">
             <TopBar currentUser={currentUser}/>
+            <StickyShareButtons
+                config={{
+                    alignment: 'left',    // alignment of buttons (left, right)
+                    color: 'social',      // set the color of buttons (social, white)
+                    enabled: true,        // show/hide buttons (true, false)
+                    font_size: 16,        // font size for the buttons
+                    hide_desktop: false,  // hide buttons on desktop (true, false)
+                    labels: 'counts',     // button labels (cta, counts, null)
+                    language: 'en',       // which language to use (see LANGUAGES)
+                    min_count: 0,         // hide react counts less than min_count (INTEGER)
+                    networks: [           // which networks to include (see SHARING NETWORKS)
+                    'linkedin',
+                    'facebook',
+                    'pinterest',
+                    'twitter',
+                    'messenger',
+                    ],
+                    padding: 12,          // padding within buttons (INTEGER)
+                    radius: 4,            // the corner radius on each button (INTEGER)
+                    show_total: true,     // show/hide the total share count (true, false)
+                    show_mobile: true,    // show/hide the buttons on mobile (true, false)
+                    show_toggle: true,    // show/hide the toggle buttons (true, false)
+                    size: 48,             // the size of each button (INTEGER)
+                    top: 160,             // offset in pixels from the top of the page
+        
+                    // OPTIONAL PARAMETERS
+                    url: window.location.href, // (defaults to current url)
+                    image: movie.image, // (defaults to og:image or twitter:image)
+                    description: 'Check',       // (defaults to og:description or twitter:description)
+                    title: 'custom title',            // (defaults to og:title or twitter:title)
+                }}
+                />
             <div className="heading">
                 <img src={movie.image}/>
                 <div className="info">
@@ -100,12 +134,35 @@ const Movie = () => {
                             initialRating={rating}
                         />
                     </div>
-                </div>
 
+                    <InlineReactionButtons
+                    config={{
+                        alignment: 'left',  // alignment of buttons (left, center, right)
+                        enabled: true,        // show/hide buttons (true, false)
+                        language: 'en',       // which language to use (see LANGUAGES)
+                        min_count: 0,         // hide react counts less than min_count (INTEGER)
+                        padding: 12,          // padding within buttons (INTEGER)
+                        reactions: [          // which reactions to include (see REACTIONS)
+                        'slight_smile',
+                        'heart_eyes',
+                        'laughing',
+                        'astonished',
+                        'sob',
+                        'rage'
+                        ],
+                        size: 25,             // the size of each button (INTEGER)
+                        spacing: 5,           // the spacing between buttons (INTE
+                    }}
+                    />
+                </div>
+                
             </div>
             <p className="description">{movie.overview}</p>
+
             <Comments currentUser={currentUser}
                     movie={movie}/>
+
+            <Footer />
         </div>
     ) : (
         <div></div>

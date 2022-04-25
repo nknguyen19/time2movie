@@ -23,7 +23,7 @@ const MovieSlider = (props) => {
         for (let i = 0; i < movie_list.length; ++i) {
             const movie_response = await fetch(`https://api.themoviedb.org/3/search/movie?api_key=15d2ea6d0dc1d476efbca3eba2b9bbfb&query=${movie_list[i].title}`);
             const movie = await movie_response.json();
-            movie_list[i].image = `http://image.tmdb.org/t/p/w500/${movie.results[0].poster_path}`;
+            movie_list[i].image = `http://image.tmdb.org/t/p/w500/${movie.results[0] ? movie.results[0].poster_path : `/default_movie_poster.jpg`}`;
         }
         setMovieList(movie_list);
     }, [])

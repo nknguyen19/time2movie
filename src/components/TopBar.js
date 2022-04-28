@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
+import SearchBar from "./SeachBar";
 
 const TopBar = (props) => {
     const navigate = useNavigate();
@@ -10,17 +11,9 @@ const TopBar = (props) => {
                 onClick={() => {navigate('/')}}>
                 Time2Movie
             </div>
-            {/* <div className="tab">
-                <div>
-                    Home
-                </div>
-                <div>
-                    Movies
-                </div>
-                <div>
-                    Actors
-                </div>
-            </div> */}
+            
+            <SearchBar />
+            
             {props.currentUser ? 
             <div className="welcome">
                 <img src={props.currentUser.image}/>

@@ -115,10 +115,6 @@
 
 .auth {
   display: flex;
-  position: absolute;
-  top: 1%;
-  left: auto;
-  right: 5%;
   width: 20%;
   padding: 0.5%;
 }
@@ -292,6 +288,8 @@
   background: #F3A974FF;
   border-radius: 0px;
   box-shadow: 0px 0px 1px #21262e, 0px 0px 2px #21262e;
+  display: flex;
+  justify-content: space-between;
 }
 
 .logo {

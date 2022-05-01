@@ -6,12 +6,14 @@ import StarRating from "react-svg-star-rating";
 import Comments from "./Comments";
 import {StickyShareButtons, InlineReactionButtons} from 'sharethis-reactjs';
 import Footer from "./Footer";
+import MovieSlider from "./MovieSlider";
 
 const Movie = () => {
     const { id } = useParams();
     const [ movie, setMovie ] = useState(null);
     const [ rating, setRating ] = useState(0);
     const [ currentUser, setCurrentUser] = useState();
+    const [ similarMovies, setSimilarMovies ] = useState([]);
 
     const fetchMovie = async () => {
         const movie_response = await fetch(`/api/movie/get/${id}`);
@@ -35,6 +37,13 @@ const Movie = () => {
             setCurrentUser(user);
         }
     }
+
+    const fetchSimilarMovies = async () => {
+        const response = await fetch(`/api/movie/get-similar/${movie.title}`);
+        const data = await response.json();
+        console.log(data);
+    }
+
     useEffect(async () => {
         fetchMovie();
         fetchUser();
@@ -49,6 +58,12 @@ const Movie = () => {
             }
         }
     }, [currentUser]);
+    
+    useEffect(async () => {
+        if (movie) {
+            fetchSimilarMovies();
+        }
+    }, [movie])
 
     const updateMovieRating = (star) => {
         setRating(star);
@@ -158,6 +173,8 @@ const Movie = () => {
                 
             </div>
             <p className="description">{movie.overview}</p>
+
+            {movie ? <MovieSlider type="Similar to this movie" title={movie.title}/> : ''}
 
             <Comments currentUser={currentUser}
                     movie={movie}/>

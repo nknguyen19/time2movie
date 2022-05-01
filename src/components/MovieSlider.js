@@ -17,8 +17,8 @@ const MovieSlider = (props) => {
         autoplaySpeed: 3000,
     });
 
-    useEffect(async () => {
-        const response = await fetch('/api/movie/get'); // filter here
+    const fetchSimilarMovies = async () => {
+        const response = await fetch(`/api/movie/get-similar/${props.title}`);
         const movie_list = await response.json();
         for (let i = 0; i < movie_list.length; ++i) {
             const movie_response = await fetch(`https://api.themoviedb.org/3/search/movie?api_key=15d2ea6d0dc1d476efbca3eba2b9bbfb&query=${movie_list[i].title}`);
@@ -26,6 +26,24 @@ const MovieSlider = (props) => {
             movie_list[i].image = `http://image.tmdb.org/t/p/w500/${movie.results[0] ? movie.results[0].poster_path : `/default_movie_poster.jpg`}`;
         }
         setMovieList(movie_list);
+    }
+
+
+    useEffect(async () => {
+        if (props.type === "Similar to this movie") {
+            fetchSimilarMovies();
+        }
+
+        else {
+            const response = await fetch('/api/movie/get'); // filter here
+            const movie_list = await response.json();
+            for (let i = 0; i < movie_list.length; ++i) {
+                const movie_response = await fetch(`https://api.themoviedb.org/3/search/movie?api_key=15d2ea6d0dc1d476efbca3eba2b9bbfb&query=${movie_list[i].title}`);
+                const movie = await movie_response.json();
+                movie_list[i].image = `http://image.tmdb.org/t/p/w500/${movie.results[0] ? movie.results[0].poster_path : `/default_movie_poster.jpg`}`;
+            }
+            setMovieList(movie_list);
+        }
     }, [])
 
     return(

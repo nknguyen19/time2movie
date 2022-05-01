@@ -2,11 +2,13 @@ import React, {useState, useEffect} from "react";
 import { useNavigate } from "react-router-dom";
 import Slider from 'react-slick';
 import StarRating from 'react-svg-star-rating';
+import ReactLoading from 'react-loading';
 
 const MovieSlider = (props) => {
     const [movieList, setMovieList] = useState([]);
     const navigate = useNavigate();
     const [hoverIndex, setHoverIndex] = useState(-1);
+    const [isDragging, setIsDragging] = useState(false);
     const [settings, setSettings] = useState({
         dots: true,
         infinite: true,
@@ -15,10 +17,26 @@ const MovieSlider = (props) => {
         slidesToScroll: 1,
         autoplay: false,
         autoplaySpeed: 3000,
+        beforeChange: (current, next) => {
+            setIsDragging(true);
+        },
+        afterChange: (current) => {
+            setIsDragging(false);
+        }
     });
 
-    const fetchSimilarMovies = async () => {
-        const response = await fetch(`/api/movie/get-similar/${props.title}`);
+    const fetchrMovies = async () => {
+        let api_url;
+        if (props.type === "Similar to this movie") {
+            api_url = `/api/movie/get-similar/${props.title}`;
+        }
+        else if (props.type === "Trending now") {
+            api_url = `/api/movie/get-trending`;
+        }
+        else {
+            api_url = `/api/movie/get`;
+        }
+        const response = await fetch(api_url);
         const movie_list = await response.json();
         for (let i = 0; i < movie_list.length; ++i) {
             const movie_response = await fetch(`https://api.themoviedb.org/3/search/movie?api_key=15d2ea6d0dc1d476efbca3eba2b9bbfb&query=${movie_list[i].title}`);
@@ -28,34 +46,20 @@ const MovieSlider = (props) => {
         setMovieList(movie_list);
     }
 
-
     useEffect(async () => {
-        if (props.type === "Similar to this movie") {
-            fetchSimilarMovies();
-        }
-
-        else {
-            const response = await fetch('/api/movie/get'); // filter here
-            const movie_list = await response.json();
-            for (let i = 0; i < movie_list.length; ++i) {
-                const movie_response = await fetch(`https://api.themoviedb.org/3/search/movie?api_key=15d2ea6d0dc1d476efbca3eba2b9bbfb&query=${movie_list[i].title}`);
-                const movie = await movie_response.json();
-                movie_list[i].image = `http://image.tmdb.org/t/p/w500/${movie.results[0] ? movie.results[0].poster_path : `/default_movie_poster.jpg`}`;
-            }
-            setMovieList(movie_list);
-        }
+        fetchrMovies();
     }, [])
 
     return(
         <div className="movie-slider">
             <h2> {props.type} </h2>
-            <Slider {...settings}>
+            {movieList.length > 0 ? <Slider {...settings}>
                 {movieList.map((movie, index) => (
                     <div className="movie-item"
                         key={index}
                         >
                         <div className="movie-info"
-                            onClick={(e) => navigate(`/movie/${movie._id}`)}
+                            onClick={(e) => !isDragging && navigate(`/movie/${movie._id}`)}
                             style={{
                                 transform: hoverIndex === index ? 'translateY(-10px)' : 'none',
                             }}
@@ -80,7 +84,10 @@ const MovieSlider = (props) => {
                         </div>
                     </div>
                     ))}
-            </Slider>
+            </Slider> :
+            <div className="loading-movielist">
+                <ReactLoading type="spin" color='#3A3A3A'/>
+            </div>}
         </div>
     )
 }

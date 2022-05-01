@@ -205,10 +205,8 @@
 
 .welcome {
   display: flex;
-  position: absolute;
-  top: 1%;
-  left: auto;
-  right: 5%;
+  padding: 5px 0px;
+  margin-right: 20px;
 }
 
 .welcome-text {
@@ -228,7 +226,6 @@
 
 .welcome img {
   border-radius: 50%;
-  width: 10%;
 }
 
 .signin-form p, .signup-form p {
@@ -545,4 +542,43 @@
 .footer p {
   font-size: 12px;
   color: #000;
+}
+
+.loading-movielist {
+  display: flex;
+  justify-content: space-around;
+}
+
+.user-menu .menu {
+  position: absolute;
+  z-index: 1;
+  background: #fff;
+  color: #00A0B5;
+  width: 10vw;
+  right: 0;
+  box-shadow: 0px 0px 5px rgba(0, 0, 0, 0.5);
+}
+
+.user-menu i, .user-menu p {
+  display: inline;
+  margin: 0 10px;
+}
+
+.user-menu > i {
+  padding: 10px 15px;
+  cursor: pointer;
+}
+
+.user-menu > i:hover {
+  background: #c2865c;
+}
+
+.menu > div {
+  margin: 0;
+  cursor: pointer;
+  padding: 5px 0;
+}
+
+.menu .logout:hover, .menu .profile:hover {
+  background: #f9f3ee;
 }

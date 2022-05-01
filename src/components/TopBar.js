@@ -4,6 +4,7 @@ import SearchBar from "./SeachBar";
 
 const TopBar = (props) => {
     const navigate = useNavigate();
+    const [menu, setMenu] = useState(false);
 
     return (
         <div className="top-bar">
@@ -21,9 +22,24 @@ const TopBar = (props) => {
                     <p>Welcome!  </p> 
                     <p>  {props.currentUser.name}</p>
                 </div>
-                {props.currentUser.isAdmin ? 
+                {/* {props.currentUser.isAdmin ? 
                     <span onClick={() => navigate('/admin')}>Admin</span> 
-                : ''}
+                : ''} */}
+                <div className="user-menu">
+                    <i class="fa fa-bars" aria-hidden="true" onClick={() => setMenu(!menu)}></i>
+                    <div className="menu" style={{
+                        display: menu? 'block' : 'none'
+                    }}>
+                        <div className="logout">
+                            <i class="fa fa-sign-out"></i>
+                            <p>Sign out</p>
+                        </div>
+                        <div className="profile">
+                            <i class="fa fa-user" aria-hidden="true"></i>
+                            <p>Profile</p>
+                        </div>
+                    </div>
+                </div>
             </div>
             :
             <div className="auth">

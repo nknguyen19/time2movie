@@ -10,12 +10,30 @@ const MessageBox = () => {
         }
     }
 
+    const addBotMessage = (new_message) => {
+        if (new_message.length > 0) {
+            setMessages([...messages, {type: 1, content: new_message}]);
+        }
+    }
+
+    const getBotReply = async (message) => {
+        const requestOptions = {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({ 
+                message: message
+            })
+        };
+        const response = await fetch('/api/movie/bot-reply', requestOptions);
+        const result = await response.json();
+        addBotMessage(result.message);
+    }
+
     useEffect(() => {
         const script = document.createElement('script');
 
         script.src = "https://apps.elfsight.com/p/platform.js";
         script.async = true;
-        console.log(document.getElementsByName("message-title"));
         document.body.appendChild(script);
 
         return () => {
@@ -25,6 +43,9 @@ const MessageBox = () => {
 
     useEffect(() => {
         document.getElementsByClassName('dummy')[0].scrollTop = 99999999;
+        if (messages.at(-1).type === 0) {
+            getBotReply(messages.at(-1).content);
+        }
     }, [messages]);
 
     return (
@@ -44,7 +65,8 @@ const MessageBox = () => {
                     <div className='dummy'>
                         {messages.map(message => (
                             <div className={`message ${message.type === 0 ? 'client' : 'server'}`}> 
-                                {message.content}
+                                {message.type === 0 ? <p>{message.content}</p>
+                                : <p dangerouslySetInnerHTML={{__html: message.content}}></p>}
                             </div>
                         ))}
                     </div>

@@ -502,6 +502,10 @@
   background-color: #fff;
 }
 
+.message p {
+  margin: 0;
+}
+
 .dummy {
   display: flex;
   flex-direction: column;

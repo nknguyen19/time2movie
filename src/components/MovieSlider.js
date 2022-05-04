@@ -33,6 +33,9 @@ const MovieSlider = (props) => {
         else if (props.type === "Trending now") {
             api_url = `/api/movie/get-trending`;
         }
+        else if (props.type === "Recommended for you") {
+            api_url = `/api/movie/get-user-recommendation/${props.userId}`;
+        }
         else {
             api_url = `/api/movie/get`;
         }

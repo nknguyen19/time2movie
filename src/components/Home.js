@@ -36,9 +36,7 @@ const Home = () => {
         }
         console.log('debug');
     }, [])
-
-
-
+    
     return (
         <div className="home">
             <TopBar currentUser={currentUser}/>
@@ -62,7 +60,7 @@ const Home = () => {
 
             <MovieSlider type="Trending now" />
 
-            <MovieSlider type="Recommended for you" />
+            {currentUser ? <MovieSlider type="Recommended for you" userId={currentUser._id}/> : ''}
 
             <MessageBox />
 

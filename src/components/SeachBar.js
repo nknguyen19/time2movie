@@ -75,7 +75,11 @@ const SearchBar = () => {
                 <i class="fa fa-search"></i>
                 <input id="search-input" type="text" placeholder="Search for a movie..."
                     onFocus={() => setSearchActive(true)}
-                    onBlur={() => setSearchActive(false)}
+                    onBlur={(e) => {
+                        setTimeout(() => {
+                            setSearchActive(false);
+                        }, 500);
+                    }}
                     onChange={search}
                 />
             </div>
@@ -87,8 +91,7 @@ const SearchBar = () => {
                     searchResult.map((movie, index) => (
                         <div className='search-result-item' key={movie._id}
                             onClick={(e) => {
-                                navigate(`/movie/${movie._id}`);
-                                console.log('hello');
+                                window.open('/movie/' + movie._id, '_blank');
                             }}>
                             <div className='item-image'>
                                 <img src={searchImages[index]}/>

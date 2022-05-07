@@ -35,7 +35,7 @@ const Home = () => {
             const user = await user_response.json();
             setCurrentUser(user);
         }
-        console.log('debug');
+        console.log(BASE_URL, process.env.NODE_ENV);
     }, [])
     
     return (

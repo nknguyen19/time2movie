@@ -21,6 +21,7 @@ const Home = () => {
     const [movieList, setMovieList] = useState([]);
 
     useEffect(async () => {
+        console.log(BASE_URL, process.env.NODE_ENV);
         const movie_list_response = await fetch(`${BASE_URL}/api/movie/get`);
         let movie_list = await movie_list_response.json();
         for (let i = 0; i < movie_list.length; ++i) {
@@ -35,7 +36,6 @@ const Home = () => {
             const user = await user_response.json();
             setCurrentUser(user);
         }
-        console.log(BASE_URL, process.env.NODE_ENV);
     }, [])
     
     return (

@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from 'react';
+import BASE_URL from '../BaseUrl';
 
 const MessageBox = () => {
     const [ messagePopup , setMessagePopup ] = useState(false);
@@ -24,7 +25,7 @@ const MessageBox = () => {
                 message: message
             })
         };
-        const response = await fetch('/api/movie/bot-reply', requestOptions);
+        const response = await fetch(`${BASE_URL}/api/movie/bot-reply`, requestOptions);
         const result = await response.json();
         addBotMessage(result.message);
     }

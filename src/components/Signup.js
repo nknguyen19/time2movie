@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import FacebookLogin from 'react-facebook-login';
 import { useNavigate } from 'react-router-dom';
+import BASE_URL from "../BaseUrl";
 
 const Signup = () => {
     const [username, setUsername] = useState('');
@@ -20,7 +21,7 @@ const Signup = () => {
                 password: password,
             })
         };
-        fetch('/api/user/create', requestOptions)
+        fetch(`${BASE_URL}/api/user/create`, requestOptions)
             .then(res => res.json())
             .then(res => {
                 if (res.message) {
@@ -45,7 +46,7 @@ const Signup = () => {
                 is_facebook_login: true,
             })
         };
-        fetch('/api/user/login-facebook', requestOptions)
+        fetch(`${BASE_URL}/api/user/login-facebook`, requestOptions)
             .then(res => res.json())
             .then(res => {
                 document.getElementsByClassName('userid')[0].value = res._id;
@@ -62,7 +63,7 @@ const Signup = () => {
                     <span>{errorMessage}</span>
                     <input type="text" placeholder="Username" onChange={(e) => setUsername(e.target.value)}/>
                     <input type="password" placeholder="Password" onChange={(e) => setPassword(e.target.value)}/>
-                    <div className="signup-btn" onClick={createUser}>
+                    <div className="signup-btn" onClick={() => createUser}>
                         Create account
                     </div>
                     <div className="or"><hr/> Or <hr/></div>

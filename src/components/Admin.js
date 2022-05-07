@@ -1,5 +1,6 @@
 import React , { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
+import BASE_URL from '../BaseUrl';
 import AddMovieForm from './AddMovieForm';
 
 const Admin = () => {
@@ -8,7 +9,7 @@ const Admin = () => {
     const [ isAddingMovie, setIsAddingMovie ] = useState(false);
 
     useEffect(async () => {
-        const response = await fetch('/api/user/get-current-user');
+        const response = await fetch(`${BASE_URL}/api/user/get-current-user`);
         if (response.status === 200) {
             const current_user = await response.json();
             setCurrentUser(current_user);

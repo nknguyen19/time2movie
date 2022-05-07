@@ -5,6 +5,7 @@ import Slider from 'react-slick';
 import MovieSlider from "./MovieSlider";
 import MessageBox from "./MessageBox";
 import Footer from "./Footer";
+import BASE_URL from "../BaseUrl";
 
 const Home = () => {
     const naviagate = useNavigate();
@@ -20,7 +21,7 @@ const Home = () => {
     const [movieList, setMovieList] = useState([]);
 
     useEffect(async () => {
-        const movie_list_response = await fetch('/api/movie/get');
+        const movie_list_response = await fetch(`${BASE_URL}/api/movie/get`);
         let movie_list = await movie_list_response.json();
         for (let i = 0; i < movie_list.length; ++i) {
             const movie_response = await fetch(`https://api.themoviedb.org/3/search/movie?api_key=15d2ea6d0dc1d476efbca3eba2b9bbfb&query=${movie_list[i].title}`);
@@ -29,7 +30,7 @@ const Home = () => {
         }
         setMovieList(movie_list);
 
-        const user_response = await fetch('/api/user/get-current-user');
+        const user_response = await fetch(`${BASE_URL}/api/user/get-current-user`);
         if (user_response.status <= 200) {
             const user = await user_response.json();
             setCurrentUser(user);

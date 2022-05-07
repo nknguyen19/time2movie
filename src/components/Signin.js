@@ -1,6 +1,7 @@
 import React, {useState, useEffect} from 'react';
 import FacebookLogin from 'react-facebook-login';
 import { useNavigate } from 'react-router-dom';
+import BASE_URL from '../BaseUrl';
 
 const Signin = () => {
     const [username, setUsername] = useState('');
@@ -20,7 +21,7 @@ const Signin = () => {
                 password: password,
             })
         };
-        fetch('/api/user/signin', requestOptions)
+        fetch(`${BASE_URL}/api/user/signin`, requestOptions)
             .then(res => res.json())
             .then(res => {
                 if (res.message) {
@@ -45,7 +46,7 @@ const Signin = () => {
                 is_facebook_login: true,
             })
         };
-        fetch('/api/user/login-facebook', requestOptions)
+        fetch(`${BASE_URL}/api/user/login-facebook`, requestOptions)
             .then(res => res.json())
             .then(res => {
                 document.getElementsByClassName('userid')[0].value = res._id;
@@ -62,14 +63,14 @@ const Signin = () => {
                     <span>{errorMessage}</span>
                     <input type="text" placeholder="Username" onChange={(e) => setUsername(e.target.value)}/>
                     <input type="password" placeholder="Password" onChange={(e) => setPassword(e.target.value)}/>
-                    <div className="signin-btn" onClick={signin}>
+                    <div className="signin-btn" onClick={() => signin()}>
                         Sign in
                     </div>
                     <div className="or"><hr/> Or <hr/></div>
                     <FacebookLogin 
                         className="facebook-signup"
                         appId="466280858581721"
-                        autoLoad={true}
+                        // autoLoad={true}
                         fields="name,email,picture"
                         callback={loginFacebook} />
                     

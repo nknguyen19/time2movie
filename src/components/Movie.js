@@ -7,6 +7,7 @@ import Comments from "./Comments";
 import {StickyShareButtons, InlineReactionButtons} from 'sharethis-reactjs';
 import Footer from "./Footer";
 import MovieSlider from "./MovieSlider";
+import BASE_URL from "../BaseUrl";
 
 const Movie = () => {
     const { id } = useParams();
@@ -16,7 +17,7 @@ const Movie = () => {
     const [ similarMovies, setSimilarMovies ] = useState([]);
 
     const fetchMovie = async () => {
-        const movie_response = await fetch(`/api/movie/get/${id}`);
+        const movie_response = await fetch(`${BASE_URL}/api/movie/get/${id}`);
         if (movie_response.status <= 200) {
             const fetch_movie = await movie_response.json();
             setRating(fetch_movie.ratings);
@@ -31,7 +32,7 @@ const Movie = () => {
     }
 
     const fetchUser = async () => {
-        const user_response = await fetch('/api/user/get-current-user');
+        const user_response = await fetch(`${BASE_URL}/api/user/get-current-user`);
         if (user_response.status <= 200) {
             const user = await user_response.json();
             setCurrentUser(user);
@@ -39,7 +40,7 @@ const Movie = () => {
     }
 
     const fetchSimilarMovies = async () => {
-        const response = await fetch(`/api/movie/get-similar/${movie.title}`);
+        const response = await fetch(`${BASE_URL}/api/movie/get-similar/${movie.title}`);
         const data = await response.json();
         console.log(data);
     }
@@ -51,7 +52,7 @@ const Movie = () => {
 
     useEffect(async () => {
         if (currentUser) {
-            const review_response = await fetch(`/api/review/get/${currentUser._id}/${id}`);
+            const review_response = await fetch(`${BASE_URL}/api/review/get/${currentUser._id}/${id}`);
             if (review_response.status <= 200) {
                 const result = await review_response.json();
                 setRating(result.ratings);
@@ -77,7 +78,7 @@ const Movie = () => {
                     ratings: star
                 })
             };
-            fetch('/api/review/create', requestOptions)
+            fetch(`${BASE_URL}/api/review/create`, requestOptions)
                 .then(res => res.json())
                 .then(res => {
                     if (res.message) {

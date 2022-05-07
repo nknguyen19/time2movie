@@ -1,6 +1,7 @@
 import { image } from "image-downloader";
 import React, { useState } from "react";
 import axios from 'axios';
+import BASE_URL from "../BaseUrl";
 
 const AddMovieForm = () => {
     const [ movie, setMovie ] = useState({})
@@ -12,7 +13,7 @@ const AddMovieForm = () => {
         data.append('movie', JSON.stringify(movie));
         axios({
             method: "post",
-            url: '/api/movie/create',
+            url: `${BASE_URL}/api/movie/create`,
             data: data,
             headers: { "Content-Type": "multipart/form-data" },
           });

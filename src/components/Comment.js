@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from 'react';
+import BASE_URL from '../BaseUrl';
 import '../style/Comments.css';
 
 const Comment = ({comment, removeComment, currentUser}) => {
@@ -18,7 +19,7 @@ const Comment = ({comment, removeComment, currentUser}) => {
     }
 
     const getLikes = async () => {
-        const likes_response = await fetch(`/api/like/get/${comment._id}`);
+        const likes_response = await fetch(`${BASE_URL}/api/like/get/${comment._id}`);
         const likes_list = await likes_response.json();
         setLikes(likes_list.length);
         if (likes_list.find(like => like.userid === comment.userid))
@@ -31,7 +32,7 @@ const Comment = ({comment, removeComment, currentUser}) => {
         if (!currentUser) {
             return
         }
-        const likes_response = await fetch(`/api/like/add`, {
+        const likes_response = await fetch(`${BASE_URL}/api/like/add`, {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json'
@@ -48,7 +49,7 @@ const Comment = ({comment, removeComment, currentUser}) => {
         if (!currentUser) {
             return
         }
-        const likes_response = await fetch(`/api/like/remove`, {
+        const likes_response = await fetch(`${BASE_URL}/api/like/remove`, {
             method: 'DELETE',
             headers: {
                 'Content-Type': 'application/json'

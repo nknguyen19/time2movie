@@ -3,6 +3,7 @@ import { useNavigate } from "react-router-dom";
 import Slider from 'react-slick';
 import StarRating from 'react-svg-star-rating';
 import ReactLoading from 'react-loading';
+import BASE_URL from "../BaseUrl";
 
 const MovieSlider = (props) => {
     const [movieList, setMovieList] = useState([]);
@@ -28,18 +29,19 @@ const MovieSlider = (props) => {
     const fetchrMovies = async () => {
         let api_url;
         if (props.type === "Similar to this movie") {
-            api_url = `/api/movie/get-similar/${props.title}`;
+            api_url = `${BASE_URL}/api/movie/get-similar/${props.title}`;
         }
         else if (props.type === "Trending now") {
-            api_url = `/api/movie/get-trending`;
+            api_url = `${BASE_URL}/api/movie/get-trending`;
         }
         else if (props.type === "Recommended for you") {
-            api_url = `/api/movie/get-user-recommendation/${props.userId}`;
+            api_url = `${BASE_URL}/api/movie/get-user-recommendation/${props.userId}`;
         }
         else {
-            api_url = `/api/movie/get`;
+            api_url = `${BASE_URL}/api/movie/get`;
         }
         const response = await fetch(api_url);
+        console.log(response);
         const movie_list = await response.json();
         for (let i = 0; i < movie_list.length; ++i) {
             const movie_response = await fetch(`https://api.themoviedb.org/3/search/movie?api_key=15d2ea6d0dc1d476efbca3eba2b9bbfb&query=${movie_list[i].title}`);
@@ -47,7 +49,10 @@ const MovieSlider = (props) => {
             movie_list[i].image = `http://image.tmdb.org/t/p/w500/${movie.results[0] ? movie.results[0].poster_path : `/default_movie_poster.jpg`}`;
         }
         setMovieList(movie_list);
+        console.log(movie_list);
     }
+
+    console.log(movieList);
 
     useEffect(async () => {
         fetchrMovies();

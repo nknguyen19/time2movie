@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from 'react'
+import BASE_URL from '../BaseUrl';
 import '../style/Comments.css';
 import Comment from './Comment';
 
@@ -10,7 +11,7 @@ const Comments = ({currentUser, movie}) => {
     }, [])
 
     const getComments = async () => {
-        const comment_response = await fetch(`/api/comment/get/${movie._id}`);
+        const comment_response = await fetch(`${BASE_URL}/api/comment/get/${movie._id}`);
         const _comments = await comment_response.json();
         setComments(_comments);
     }
@@ -21,7 +22,7 @@ const Comments = ({currentUser, movie}) => {
         }
         if (comment.userid !== currentUser._id) 
             return;
-        const response = await fetch(`/api/comment/remove`, {
+        const response = await fetch(`${BASE_URL}/api/comment/remove`, {
             method: 'DELETE',
             headers: {
                 'Content-Type': 'application/json'
@@ -35,7 +36,7 @@ const Comments = ({currentUser, movie}) => {
     }
 
     const handleSubmit = async () => {
-        const comment_response = await fetch(`/api/comment/add`, {
+        const comment_response = await fetch(`${BASE_URL}/api/comment/add`, {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json'

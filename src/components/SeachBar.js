@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from  'react'
 import { useNavigate } from 'react-router-dom';
 import StarRating from 'react-svg-star-rating';
+import BASE_URL from '../BaseUrl';
 import '../style/SearchBar.css';
 
 const SearchBar = () => {
@@ -53,7 +54,7 @@ const SearchBar = () => {
     }
 
     useEffect(async () => {
-        const response = await fetch('/api/movie/getall');
+        const response = await fetch(`${BASE_URL}/api/movie/getall`);
         const data = await response.json();
         setMovies(data);
     }, [])

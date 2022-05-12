@@ -23,14 +23,13 @@ const App = () => {
     />
     <link
       rel="stylesheet"
-      type="text/css" 
+      type="text/css"
       href="https://cdnjs.cloudflare.com/ajax/libs/slick-carousel/1.6.0/slick-theme.min.css"
     />
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css"></link>
     <link href='https://fonts.googleapis.com/css?family=Poppins' rel='stylesheet'></link>
     <Router>
       <Routes>
-        {/* <Route path='/' element={<Home />}/> */}
         <Route path='/' element={<Home />}/>
         <Route path='/signin' element={<Signin/>} />
         <Route path='/signup' element={<Signup/>} />

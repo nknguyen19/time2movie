@@ -28,7 +28,7 @@ const Signup = () => {
                     setErrorMessage(res.message);
                 }
                 else {
-                    document.getElementsByClassName('userid')[0].value = res._id;
+                    window.localStorage.setItem('currentUser', JSON.stringify(res));
                     navigate('/');
                 }
             });
@@ -49,6 +49,7 @@ const Signup = () => {
         fetch(`${BASE_URL}/api/user/login-facebook`, requestOptions)
             .then(res => res.json())
             .then(res => {
+                window.localStorage.setItem('currentUser', JSON.stringify(res));
                 document.getElementsByClassName('userid')[0].value = res._id;
                 navigate('/');
             });

@@ -20,6 +20,10 @@ const Home = () => {
       });
     const [movieList, setMovieList] = useState([]);
 
+    const fetchUser = async () => {
+        setCurrentUser(JSON.parse(window.localStorage.getItem('currentUser')));
+    }
+
     useEffect(async () => {
         console.log(BASE_URL, process.env.NODE_ENV);
         const movie_list_response = await fetch(`${BASE_URL}/api/movie/get`);
@@ -31,11 +35,7 @@ const Home = () => {
         }
         setMovieList(movie_list);
 
-        const user_response = await fetch(`${BASE_URL}/api/user/get-current-user`);
-        if (user_response.status <= 200) {
-            const user = await user_response.json();
-            setCurrentUser(user);
-        }
+        fetchUser();
     }, [])
     
     return (

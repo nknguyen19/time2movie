@@ -35,6 +35,7 @@ const Signin = () => {
     }
 
     const loginFacebook = (info) => {
+        console.log(info);
         const requestOptions = {
             method: 'POST',
             headers: { 'Content-Type': 'application/json' },
@@ -69,7 +70,7 @@ const Signin = () => {
                     <div className="or"><hr/> Or <hr/></div>
                     <FacebookLogin 
                         className="facebook-signup"
-                        appId="466280858581721"
+                        appId="417605773527214"
                         // autoLoad={true}
                         fields="name,email,picture"
                         callback={loginFacebook} />

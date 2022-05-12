@@ -10,7 +10,7 @@ const SearchBar = () => {
     const [searchImages, setSearchImages] = useState([]);
     const [searchActive, setSearchActive] = useState(false);
     const navigate = useNavigate();
-
+    console.log(BASE_URL)
     const search = async (e) => {
         e.preventDefault();
         const searchTerm = e.target.value;

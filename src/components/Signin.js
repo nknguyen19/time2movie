@@ -1,5 +1,6 @@
 import React, {useState, useEffect} from 'react';
 import FacebookLogin from 'react-facebook-login';
+import {GoogleLogin} from 'react-google-login';
 import { useNavigate } from 'react-router-dom';
 import BASE_URL from '../BaseUrl';
 
@@ -35,7 +36,6 @@ const Signin = () => {
     }
 
     const loginFacebook = (info) => {
-        console.log(info);
         const requestOptions = {
             method: 'POST',
             headers: { 'Content-Type': 'application/json' },
@@ -54,6 +54,8 @@ const Signin = () => {
                 naviagte(-1);
             });
     }
+    
+
 
     return (
         <div className="signin">
@@ -70,7 +72,7 @@ const Signin = () => {
                     <div className="or"><hr/> Or <hr/></div>
                     <FacebookLogin 
                         className="facebook-signup"
-                        appId="417605773527214"
+                        appId="466280858581721"
                         // autoLoad={true}
                         fields="name,email,picture"
                         callback={loginFacebook} />

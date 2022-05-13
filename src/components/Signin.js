@@ -2,6 +2,9 @@ import React, {useState, useEffect} from 'react';
 import FacebookLogin from 'react-facebook-login';
 import { useNavigate } from 'react-router-dom';
 import BASE_URL from '../BaseUrl';
+import { GoogleLogin, GoogleOAuthProvider } from '@react-oauth/google';
+
+
 
 const Signin = () => {
     const [username, setUsername] = useState('');
@@ -54,9 +57,33 @@ const Signin = () => {
                 naviagte(-1);
             });
     }
+    const loginGoogleSuccess = (info)=>
+    {
+        console.log(info);
+        const requestOptions = {
+            method:'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({
+                credentials: info.credential
+        })
+    };
+        fetch(`${BASE_URL}/api/user/login-google`, requestOptions)
+            .then(res=> res.json())
+            .then(res => {
+                document.getElementsByClassName('userid')[0].value = res._id;
+                console.log(res);
+                naviagte(-1);
+            });
+
+    }
+    const loginGoogleError = (info)=>
+    {
+        console.log(info);
+    }
 
     return (
         <div className="signin">
+            <GoogleOAuthProvider clientId="1068511937331-0qdrv0dc6hb5vq8q7rbqiqvc2sjsgmr2.apps.googleusercontent.com">;
             <div className="signin-wrap">
                 <div className="signin-form">
                     <h3>Welcome back to</h3>
@@ -75,10 +102,14 @@ const Signin = () => {
                         fields="name,email,picture"
                         callback={loginFacebook} />
                     
+                    <GoogleLogin
+                    onSuccess={loginGoogleSuccess}
+                    onError = {loginGoogleError}/>
                     <p>Don't have an account? <a href="/signup">Sign up</a></p>
                 </div>
                 <img src="signin-background.jpg" alt="image" />
             </div>
+            </GoogleOAuthProvider>
         </div>
     )
 }

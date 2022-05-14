@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import FacebookLogin from 'react-facebook-login';
 import { useNavigate } from 'react-router-dom';
 import BASE_URL from "../BaseUrl";
+import { GoogleLogin, GoogleOAuthProvider } from '@react-oauth/google';
 
 const Signup = () => {
     const [username, setUsername] = useState('');
@@ -50,17 +51,41 @@ const Signup = () => {
             .then(res => res.json())
             .then(res => {
                 window.localStorage.setItem('currentUser', JSON.stringify(res));
-                document.getElementsByClassName('userid')[0].value = res._id;
                 navigate('/');
             });
     }
 
+    const loginGoogleSuccess = (info)=>
+    {
+        console.log(info);
+        const requestOptions = {
+            method:'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({
+                credentials: info.credential
+        })
+    };
+        fetch(`${BASE_URL}/api/user/login-google`, requestOptions)
+            .then(res=> res.json())
+            .then(res => {
+                window.localStorage.setItem('currentUser', JSON.stringify(res));
+                navigate(-1);
+            });
+
+    }
+    const loginGoogleError = (info)=>
+    {
+        console.log(info);
+    }
+
     return (
         <div className="signup">
+            <GoogleOAuthProvider clientId="1068511937331-0qdrv0dc6hb5vq8q7rbqiqvc2sjsgmr2.apps.googleusercontent.com">
+
             <div className="signup-wrap">
                 <div className="signup-form">
                     <h3>Sign up</h3>
-                    <p>Time2Movie is totally free to use. Sign up using your email address or phone number below to get started.</p>
+                    <p>Sign up using your email address or phone number below to get started.</p>
                     <span>{errorMessage}</span>
                     <input type="text" placeholder="Username" onChange={(e) => setUsername(e.target.value)}/>
                     <input type="password" placeholder="Password" onChange={(e) => setPassword(e.target.value)}/>
@@ -68,16 +93,25 @@ const Signup = () => {
                         Create account
                     </div>
                     <div className="or"><hr/> Or <hr/></div>
-                    <FacebookLogin 
-                        className="facebook-signup"
-                        appId="466280858581721"
-                        autoLoad={true}
-                        fields="name,email,picture"
-                        callback={loginFacebook} />
+                    <div className='facebook-login'>
+                        <FacebookLogin 
+                            className="facebook-signup"
+                            appId="417605773527214"
+                            // autoLoad={true}
+                            fields="name,email,picture"
+                            callback={loginFacebook} />    
+                    </div>
+                    <div className='google-login'>
+                        <GoogleLogin
+                            className="google-signin"
+                            onSuccess={loginGoogleSuccess}
+                            onError = {loginGoogleError}/>            
+                    </div>
                     <p>Already have an account?<a href="/signin">Sign in</a></p>
                 </div>
                 <img src="signup-background.jpg" alt="image" />
             </div>
+            </GoogleOAuthProvider>
         </div>
     );
 }

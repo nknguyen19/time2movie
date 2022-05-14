@@ -10,7 +10,7 @@ const Signin = () => {
     const [username, setUsername] = useState('');
     const [password, setPassword] = useState('');
     const [errorMessage, setErrorMessage] = useState('');
-    const naviagte = useNavigate();
+    const navigate = useNavigate();
 
     const signin = () => {
         if (username.length === 0 || password === 0) { // TODO: handle input error
@@ -32,7 +32,7 @@ const Signin = () => {
                 } 
                 else {
                     window.localStorage.setItem('currentUser', JSON.stringify(res));
-                    naviagte(-1);
+                    navigate(-1);
                 }
             });
     }
@@ -54,7 +54,7 @@ const Signin = () => {
             .then(res => res.json())
             .then(res => {
                 window.localStorage.setItem('currentUser', JSON.stringify(res));
-                naviagte(-1);
+                navigate(-1);
             });
     }
     const loginGoogleSuccess = (info)=>
@@ -71,7 +71,7 @@ const Signin = () => {
             .then(res=> res.json())
             .then(res => {
                 window.localStorage.setItem('currentUser', JSON.stringify(res));
-                naviagte(-1);
+                navigate(-1);
             });
 
     }
@@ -94,17 +94,21 @@ const Signin = () => {
                         Sign in
                     </div>
                     <div className="or"><hr/> Or <hr/></div>
-                    <FacebookLogin 
-                        className="facebook-signup"
-                        appId="417605773527214"
-                        // autoLoad={true}
-                        fields="name,email,picture"
-                        callback={loginFacebook} />
+                    <div className='facebook-login'>
+                        <FacebookLogin 
+                            className="facebook-signup"
+                            appId="417605773527214"
+                            // autoLoad={true}
+                            fields="name,email,picture"
+                            callback={loginFacebook} />    
+                    </div>
+                    <div className='google-login'>
+                        <GoogleLogin
+                            className="google-signin"
+                            onSuccess={loginGoogleSuccess}
+                            onError = {loginGoogleError}/>            
+                    </div>
                     
-                    <GoogleLogin
-                    className="google-signin"
-                    onSuccess={loginGoogleSuccess}
-                    onError = {loginGoogleError}/>
                     <p>Don't have an account? <a href="/signup">Sign up</a></p>
                 </div>
                 <img src="signin-background.jpg" alt="image" />

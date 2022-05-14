@@ -196,11 +196,17 @@
 }
 
 .kep-login-facebook {
-  width: 70%;
-  margin: 10% 15%;
-  font-size: 2vh !important;
+  width: 210px;
+  font-size: 1.7vh !important;
   font-family: 'Helvetica Neue',Helvetica,Arial,sans-serif !important;
   padding: 2% !important;
+  margin: 10% 0 0 50%;
+  transform: translate(-50%);
+}
+
+.google-login > div{ 
+  margin: 3% 0 0 50%;
+  transform: translate(-50%);
 }
 
 .welcome {
@@ -230,6 +236,7 @@
 
 .signin-form p, .signup-form p {
   text-align: center;
+  margin: 5px
 }
 
 .signin-form p a, .signup-form p a {

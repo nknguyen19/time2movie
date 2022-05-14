@@ -31,7 +31,7 @@ const Signin = () => {
                     setErrorMessage(res.message);   
                 } 
                 else {
-                    document.getElementsByClassName('userid')[0].value = res._id;
+                    window.localStorage.setItem('currentUser', JSON.stringify(res));
                     naviagte(-1);
                 }
             });
@@ -53,7 +53,8 @@ const Signin = () => {
         fetch(`${BASE_URL}/api/user/login-facebook`, requestOptions)
             .then(res => res.json())
             .then(res => {
-                document.getElementsByClassName('userid')[0].value = res._id;
+                window.localStorage.setItem('currentUser', JSON.stringify(res));
+                console.log(window.localStorage.getItem('currentUser'));
                 naviagte(-1);
             });
     }

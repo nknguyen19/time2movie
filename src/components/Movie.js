@@ -32,12 +32,15 @@ const Movie = () => {
     }
 
     const fetchUser = async () => {
-        const user_response = await fetch(`${BASE_URL}/api/user/get-current-user`);
-        if (user_response.status <= 200) {
-            const user = await user_response.json();
-            setCurrentUser(user);
-        }
+        // const user_response = await fetch(`${BASE_URL}/api/user/get-current-user`);
+        // if (user_response.status <= 200) {
+        //     const user = await user_response.json();
+        //     setCurrentUser(user);
+        // }
+        setCurrentUser(JSON.parse(window.localStorage.getItem('currentUser')));
     }
+
+    console.log(currentUser);
 
     const fetchSimilarMovies = async () => {
         const response = await fetch(`${BASE_URL}/api/movie/get-similar/${movie.title}`);

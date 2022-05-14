@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
+import BASE_URL from "../BaseUrl";
 import SearchBar from "./SeachBar";
 
 const TopBar = (props) => {
@@ -17,7 +18,7 @@ const TopBar = (props) => {
             
             {props.currentUser ? 
             <div className="welcome">
-                <img src={props.currentUser.image}/>
+                <img src={`${BASE_URL}${props.currentUser.image}`}/>
                 <div className="welcome-text">
                     <p>Welcome!  </p> 
                     <p>  {props.currentUser.name}</p>

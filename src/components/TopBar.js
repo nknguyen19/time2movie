@@ -12,6 +12,7 @@ const TopBar = (props) => {
         navigate("/");
     }
 
+
     return (
         <div className="top-bar">
             <div className="logo"
@@ -41,7 +42,7 @@ const TopBar = (props) => {
                             <p>Sign out</p>
                         </div>
                         <div className="profile">
-                            <i class="fa fa-user" aria-hidden="true"></i>
+                            <i class="fa fa-user" aria-hidden="true" onClick={()=> {navigate('/viewprofile')}}></i>
                             <p>Profile</p>
                         </div>
                     </div>

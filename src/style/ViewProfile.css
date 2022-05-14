@@ -1,0 +1,38 @@
+.view-profile {
+  box-sizing: border-box;
+  width: 100vw;
+  background-color: blue;
+}
+.profile {
+  box-sizing: border-box;
+  padding: 5em;
+  display: flex;
+  flex-direction: row;
+  justify-content: stretch;
+  background-color: forestgreen;
+}
+.profile-image {
+  flex: auto;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  background-color: aqua;
+  padding: 2em;
+}
+.profile-detail {
+  flex-grow: 6;
+  padding: 2em;
+  display: flex;
+  flex-direction: column;
+  gap: 1.3em;
+}
+.inputProfile {
+  display: flex;
+  flex-direction: column;
+  gap: 0.6em;
+}
+#save-changes-button {
+  align-self: flex-end;
+  box-sizing: border-box;
+  padding: 10px;
+}

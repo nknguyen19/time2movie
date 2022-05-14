@@ -10,6 +10,7 @@ import Signup from './components/Signup';
 import Signin from './components/Signin';
 import Admin from './components/Admin';
 import Movie from './components/Movie';
+import ViewProfile from './components/ViewProfile';
 
 
 const App = () => {
@@ -35,6 +36,7 @@ const App = () => {
         <Route path='/signup' element={<Signup/>} />
         <Route path='/admin' element={<Admin/>} />
         <Route path='/movie/:id' element={<Movie/>} />
+        <Route path='/viewprofile' element={<ViewProfile/>} />
       </Routes>
       <input className='userid' type="hidden"/>
     </Router>

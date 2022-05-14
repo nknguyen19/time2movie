@@ -7,6 +7,11 @@ const TopBar = (props) => {
     const navigate = useNavigate();
     const [menu, setMenu] = useState(false);
 
+    const signOut = () => {
+        window.localStorage.removeItem("currentUser");
+        navigate("/");
+    }
+
     return (
         <div className="top-bar">
             <div className="logo"
@@ -31,7 +36,7 @@ const TopBar = (props) => {
                     <div className="menu" style={{
                         display: menu? 'block' : 'none'
                     }}>
-                        <div className="logout">
+                        <div className="logout" onClick={() => signOut()}>
                             <i class="fa fa-sign-out"></i>
                             <p>Sign out</p>
                         </div>

@@ -54,7 +54,6 @@ const Signin = () => {
             .then(res => res.json())
             .then(res => {
                 window.localStorage.setItem('currentUser', JSON.stringify(res));
-                console.log(window.localStorage.getItem('currentUser'));
                 naviagte(-1);
             });
     }
@@ -71,8 +70,7 @@ const Signin = () => {
         fetch(`${BASE_URL}/api/user/login-google`, requestOptions)
             .then(res=> res.json())
             .then(res => {
-                document.getElementsByClassName('userid')[0].value = res._id;
-                console.log(res);
+                window.localStorage.setItem('currentUser', JSON.stringify(res));
                 naviagte(-1);
             });
 
@@ -84,7 +82,7 @@ const Signin = () => {
 
     return (
         <div className="signin">
-            <GoogleOAuthProvider clientId="1068511937331-0qdrv0dc6hb5vq8q7rbqiqvc2sjsgmr2.apps.googleusercontent.com">;
+            <GoogleOAuthProvider clientId="1068511937331-0qdrv0dc6hb5vq8q7rbqiqvc2sjsgmr2.apps.googleusercontent.com">
             <div className="signin-wrap">
                 <div className="signin-form">
                     <h3>Welcome back to</h3>
@@ -104,6 +102,7 @@ const Signin = () => {
                         callback={loginFacebook} />
                     
                     <GoogleLogin
+                    className="google-signin"
                     onSuccess={loginGoogleSuccess}
                     onError = {loginGoogleError}/>
                     <p>Don't have an account? <a href="/signup">Sign up</a></p>

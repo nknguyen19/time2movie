@@ -63,7 +63,7 @@ const Home = () => {
 
             {currentUser ? <MovieSlider type="Recommended for you" userId={currentUser._id}/> : ''}
 
-            <MessageBox />
+            {currentUser ? <MessageBox /> : ''}
 
             <Footer />
         </div>

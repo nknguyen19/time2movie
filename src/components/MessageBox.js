@@ -22,10 +22,12 @@ const MessageBox = () => {
             method: 'POST',
             headers: { 'Content-Type': 'application/json' },
             body: JSON.stringify({ 
-                message: message
+                message: message,
+                user_id: JSON.parse(window.localStorage.getItem('currentUser'))._id,
             })
         };
         const response = await fetch(`${BASE_URL}/api/movie/bot-reply`, requestOptions);
+        console.log(response);
         const result = await response.json();
         addBotMessage(result.message);
     }

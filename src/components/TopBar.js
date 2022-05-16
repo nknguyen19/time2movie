@@ -37,13 +37,13 @@ const TopBar = (props) => {
                     <div className="menu" style={{
                         display: menu? 'block' : 'none'
                     }}>
+                        <div className="profile" onClick={()=> {navigate('/viewprofile')}}>
+                            <i class="fa fa-user" aria-hidden="true"></i>
+                            <p>Profile</p>
+                        </div>
                         <div className="logout" onClick={() => signOut()}>
                             <i class="fa fa-sign-out"></i>
                             <p>Sign out</p>
-                        </div>
-                        <div className="profile">
-                            <i class="fa fa-user" aria-hidden="true" onClick={()=> {navigate('/viewprofile')}}></i>
-                            <p>Profile</p>
                         </div>
                     </div>
                 </div>

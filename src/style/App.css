@@ -226,12 +226,14 @@
   font-style: italic;
 }
 
-.welcome div {
-  margin: 2% 10px;
+.welcome .welcome-text {
+  margin: 1vh;
 }
 
 .welcome img {
   border-radius: 50%;
+  width: 5vh;
+  height: 5vh;
 }
 
 .signin-form p, .signup-form p {
@@ -567,6 +569,7 @@
   color: #00A0B5;
   width: 10vw;
   right: 0;
+  top: 6%;
   box-shadow: 0px 0px 5px rgba(0, 0, 0, 0.5);
 }
 

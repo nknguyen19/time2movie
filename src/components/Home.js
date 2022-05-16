@@ -16,7 +16,9 @@ const Home = () => {
         speed: 500,
         slidesToShow: 1,
         slidesToScroll: 1,
-        dots: false
+        dots: false,
+        autoplay: true,
+        autoplaySpeed: 6000,
       });
     const [movieList, setMovieList] = useState([]);
 
@@ -25,7 +27,6 @@ const Home = () => {
     }
 
     useEffect(async () => {
-        console.log(BASE_URL, process.env.NODE_ENV);
         const movie_list_response = await fetch(`${BASE_URL}/api/movie/get`);
         let movie_list = await movie_list_response.json();
         for (let i = 0; i < movie_list.length; ++i) {
@@ -46,7 +47,8 @@ const Home = () => {
                     {movieList.map(movie => (
                         <div className="movie-intro">
                             <div className="movie-title">
-                                <h1>{movie.title}</h1>
+                                <h1>{movie.title} ({movie.release})</h1>
+                                <h2>By <h2>{movie.director}</h2></h2>
                                 <p>{movie.overview}</p>
                             </div>
                             
@@ -60,6 +62,8 @@ const Home = () => {
             </div>
 
             <MovieSlider type="Trending now" />
+
+            <MovieSlider type="Newest" />
 
             {currentUser ? <MovieSlider type="Recommended for you" userId={currentUser._id}/> : ''}
 

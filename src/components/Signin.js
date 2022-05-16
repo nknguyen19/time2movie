@@ -38,7 +38,6 @@ const Signin = () => {
     }
 
     const loginFacebook = (info) => {
-        console.log(info);
         const requestOptions = {
             method: 'POST',
             headers: { 'Content-Type': 'application/json' },
@@ -59,7 +58,6 @@ const Signin = () => {
     }
     const loginGoogleSuccess = (info)=>
     {
-        console.log(info);
         const requestOptions = {
             method:'POST',
             headers: { 'Content-Type': 'application/json' },

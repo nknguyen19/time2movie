@@ -46,7 +46,8 @@
 .inputProfile {
   display: flex;
   flex-direction: row;
-  margin: 2vh 0;
+  box-shadow: 5px 5px 5px rgba(0, 0, 0, 0.5);
+  padding: 1vh;
 }
 
 .inputProfile label {

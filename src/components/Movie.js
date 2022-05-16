@@ -21,7 +21,6 @@ const Movie = () => {
         if (movie_response.status <= 200) {
             const fetch_movie = await movie_response.json();
             setRating(fetch_movie.ratings);
-            console.log(fetch_movie);
             const movie_img_response = await fetch(`https://api.themoviedb.org/3/search/movie?api_key=15d2ea6d0dc1d476efbca3eba2b9bbfb&query=${fetch_movie.title}`);
             const movie_img = await movie_img_response.json();
             setMovie({
@@ -32,20 +31,7 @@ const Movie = () => {
     }
 
     const fetchUser = async () => {
-        // const user_response = await fetch(`${BASE_URL}/api/user/get-current-user`);
-        // if (user_response.status <= 200) {
-        //     const user = await user_response.json();
-        //     setCurrentUser(user);
-        // }
         setCurrentUser(JSON.parse(window.localStorage.getItem('currentUser')));
-    }
-
-    console.log(currentUser);
-
-    const fetchSimilarMovies = async () => {
-        const response = await fetch(`${BASE_URL}/api/movie/get-similar/${movie.title}`);
-        const data = await response.json();
-        console.log(data);
     }
 
     useEffect(async () => {
@@ -62,12 +48,7 @@ const Movie = () => {
             }
         }
     }, [currentUser]);
-    
-    useEffect(async () => {
-        if (movie) {
-            fetchSimilarMovies();
-        }
-    }, [movie])
+
 
     const updateMovieRating = (star) => {
         setRating(star);
@@ -135,7 +116,6 @@ const Movie = () => {
                     <h3>{(new Date(Date.parse(movie.release))).getFullYear()}</h3>
                     <h3>Director: {movie.director}</h3>
                     <h3>Starring: {movie.stars.join(" , ")}</h3>
-                    {console.log(movie.stars)}
                     <div className="avg-rating">
                         <h3>Community Rating</h3>
                         <StarRating
@@ -178,7 +158,7 @@ const Movie = () => {
             </div>
             <p className="description">{movie.overview}</p>
 
-            {movie ? <MovieSlider type="Similar to this movie" title={movie.title}/> : ''}
+            {movie ? <MovieSlider type="Similar to this movie" id={id}/> : ''}
 
             <Comments currentUser={currentUser}
                     movie={movie}/>

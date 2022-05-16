@@ -61,7 +61,6 @@ const SearchBar = () => {
 
     useEffect(async () => {
         let images = [];
-        console.log(searchResult);
         for (let i = 0; i < searchResult.length; ++i) {
             const movie_response = await fetch(`https://api.themoviedb.org/3/search/movie?api_key=15d2ea6d0dc1d476efbca3eba2b9bbfb&query=${searchResult[i].title}`);
             const movie = await movie_response.json();

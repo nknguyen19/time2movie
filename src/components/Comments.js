@@ -31,7 +31,6 @@ const Comments = ({currentUser, movie}) => {
                 id: comment._id,
             })
         });
-        console.log('debug');
         getComments();
     }
 

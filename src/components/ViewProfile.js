@@ -10,6 +10,7 @@ const ViewProfile = () => {
   const [loading, setLoading] = useState(true);
   const [currentUser, setCurrentUser] = useState();
   const [userInputForm, setUserInputForm] = useState({});
+  const [isSuccess, setIsSuccess] = useState(false);
   const fetchUser = async () => {
     setCurrentUser(JSON.parse(window.localStorage.getItem("currentUser")));
   };
@@ -44,6 +45,7 @@ const ViewProfile = () => {
         } else {
           setCurrentUser(res);
           window.localStorage.setItem("currentUser", JSON.stringify(res));
+          setIsSuccess(true);
         }
       });
   };

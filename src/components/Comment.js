@@ -69,7 +69,7 @@ const Comment = ({comment, removeComment, currentUser}) => {
     return (
         <div className="comment">
             <div className="comment-avatar">
-                <img src={comment.avatar}/>
+                <img src={`${BASE_URL}${currentUser.image}`}/>
             </div>
             <div className='comment-text'>
                 <p className='name'>{comment.name}</p>

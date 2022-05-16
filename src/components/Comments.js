@@ -66,7 +66,7 @@ const Comments = ({currentUser, movie}) => {
             
             {currentUser ?
              <div className="add-comment">
-                <img src={currentUser.image}/>
+                <img src={`${BASE_URL}${currentUser.image}`}/>
                 <input id='input-comment' type='text' placeholder='Add your comment here ...'/>
                 <button onClick={handleSubmit}>Send</button>
             </div>

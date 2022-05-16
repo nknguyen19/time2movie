@@ -9,7 +9,8 @@ const TopBar = (props) => {
 
     const signOut = () => {
         window.localStorage.removeItem("currentUser");
-        navigate("/");
+        // navigate("/", { replace: true });
+        window.location.href = "/";
     }
 
 

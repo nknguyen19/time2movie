@@ -82,6 +82,7 @@ const MovieSlider = (props) => {
                                     isReadOnly
                                     initialRating={movie.rating}
                                     size={window.innerHeight * 0.03}
+                                    unit="float"
                                     />
                             </div>
                             <span>{movie.title.toUpperCase()}</span>

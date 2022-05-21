@@ -222,8 +222,8 @@
 
 .welcome {
   display: flex;
-  padding: 5px 0px;
   margin-right: 20px;
+  margin-top: 2vh;
 }
 
 .welcome-text {
@@ -323,7 +323,7 @@
 }
 
 .intro-slider {
-  height: 40vh;
+  height: 50vh;
   background-color: #fff;
   color: #000;
 }
@@ -584,6 +584,10 @@
 .loading-movielist {
   display: flex;
   justify-content: space-around;
+}
+
+.user-menu {
+  margin-top: 1vh;
 }
 
 .user-menu .menu {

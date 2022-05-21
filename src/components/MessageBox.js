@@ -27,7 +27,6 @@ const MessageBox = () => {
             })
         };
         const response = await fetch(`${BASE_URL}/api/movie/bot-reply`, requestOptions);
-        console.log(response);
         const result = await response.json();
         addBotMessage(result.message);
     }

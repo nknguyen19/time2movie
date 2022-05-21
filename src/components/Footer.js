@@ -3,6 +3,9 @@ import React from "react";
 const Footer = () => {
     return (
         <div className="footer">
+            <div className="logo">
+                <img src="/logo.png"/>
+            </div>
             <div className="project-info">
                 <h3>Time2Movie</h3>
                 <p>This is a project for course CS422</p>

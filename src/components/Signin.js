@@ -83,7 +83,7 @@ const Signin = () => {
             <GoogleOAuthProvider clientId="1068511937331-0qdrv0dc6hb5vq8q7rbqiqvc2sjsgmr2.apps.googleusercontent.com">
             <div className="signin-wrap">
                 <div className="signin-form">
-                    <h3>Welcome back to</h3>
+                    <h3>Welcome back</h3>
                     <p>Sign in using your account registered with Time2Movie</p>
                     <span>{errorMessage}</span>
                     <input type="text" placeholder="Username" onChange={(e) => setUsername(e.target.value)}/>
